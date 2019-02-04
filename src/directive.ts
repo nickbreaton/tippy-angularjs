@@ -10,18 +10,19 @@ const scope = {
 };
 
 const link: IDirectiveLinkFn = (scope, element, attrs, _, transclude) => transclude!((contents) => {
-  // create wrapper element
   const parent = document.createElement('div');
 
-  // add each transcluded node to wrapper element
   Array.from(contents || []).forEach((child) => {
     parent.appendChild(child)
   });
 
-  // create tippy instance
   const instance = tippy.one(element[0].parentElement!, {
     content: parent
   });
+
+  // lifecycle
+
+  scope.$on('$destroy', () => instance.destroy());
 
   // apply custom watchers
 
