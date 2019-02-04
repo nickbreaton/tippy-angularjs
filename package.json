@@ -1,12 +1,16 @@
 {
   "name": "tippy-angularjs",
+  "version": "0.0.2",
   "license": "MIT",
   "author": {
     "name": "Nick Breaton",
     "email": "nick@breaton.com",
     "url": "https://nickbreaton.com"
   },
-  "version": "0.0.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nickbreaton/tippy-angularjs"
+  },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
