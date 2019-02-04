@@ -10,6 +10,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
+    "prepublish": "npm run build",
     "prebuild": "rimraf lib/*",
     "build": "tsc --outDir lib",
     "example": "parcel example/index.html"
