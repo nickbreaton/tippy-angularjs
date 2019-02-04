@@ -12,10 +12,17 @@ npm i tippy-angularjs
 
 Place a `<tippy>` as a child of the element it describes.
 
+```js
+import tippyAngular from 'tippy-angularjs';
+import 'tippy.js/dist/tippy.css';
+
+angular.module('app', [tippyAngular]);
+```
+
 ```html
 <button>
   Increment
-  <tippy>Adds 1 to the Count</tippy>
+  <tippy>add one to the count</tippy>
 </button>
 ```
 
@@ -47,6 +54,7 @@ AngularJS provides a few ways for defining attributes. Please see the following 
 
 | Directive | Binding | Description |
 |-----------|---------|---------|
+| `class` | `@` text | Applys a class to the content wrapper `div`. <br><br> `class="block__element--modifier"` |
 | `on-create` | `&` expression | Is executed when the instance is created. `$instance` is avaiable to get a reference to the current instance. <br><br> `on-create="$ctrl.log($instance)"` |
 
 ### Unimplemented Attributes

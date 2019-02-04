@@ -1,10 +1,9 @@
 import angular from 'angular';
+import tippyAngular from '../src/index.ts';
 import 'tippy.js/dist/tippy.css';
 
-import '../src/index.ts';
-
 const app = angular.module('debug', [
-  'tippy'
+  tippyAngular
 ]);
 
 app.controller('DebugController', function () {

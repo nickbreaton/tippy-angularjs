@@ -3,7 +3,11 @@ import { IDirective, IDirectiveLinkFn } from 'angular';
 import mappers from './bindings/mappers';
 import tippy from 'tippy.js';
 
-const scope = { ...createScope(), onCreate: '&?onCreate' };
+const scope = {
+  ...createScope(),
+  onCreate: '&?onCreate',
+  class: '@?class'
+};
 
 const link: IDirectiveLinkFn = (scope, element, attrs, _, transclude) => transclude!((contents) => {
   // create wrapper element
@@ -25,6 +29,10 @@ const link: IDirectiveLinkFn = (scope, element, attrs, _, transclude) => transcl
     if (typeof callback === 'function') {
       callback({ $instance: instance });
     }
+  });
+
+  scope.$watch('class', (value?: string) => {
+    parent.className = value || '';
   });
 
   // apply tippy option watchers

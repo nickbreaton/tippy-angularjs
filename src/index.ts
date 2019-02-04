@@ -5,4 +5,4 @@ const module = angular.module('tippy', []);
 
 module.directive('tippy', () => tippyDirective);
 
-export default module;
+export default module.name;
