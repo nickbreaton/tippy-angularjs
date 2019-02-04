@@ -1,12 +1,36 @@
 {
+  "name": "tippy-angularjs",
+  "license": "MIT",
+  "author": {
+    "name": "Nick Breaton",
+    "email": "nick@breaton.com",
+    "url": "https://nickbreaton.com"
+  },
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "prebuild": "rimraf lib/*",
+    "build": "tsc --outDir lib"
+  },
   "devDependencies": {
     "@types/angular": "^1.6.53",
+    "@types/lodash.flatmap": "^4.5.4",
+    "@types/lodash.keys": "^4.2.4",
+    "@types/lodash.values": "^4.3.4",
     "angular": "^1.7.6",
     "parcel": "^1.11.0",
+    "rimraf": "^2.6.3",
+    "tippy.js": "^3.4.1",
     "typescript": "^3.3.1"
   },
+  "peerDependencies": {
+    "tippy.js": "3.*",
+    "angular": "*"
+  },
   "dependencies": {
-    "lodash": "^4.17.11",
-    "tippy.js": "^3.4.1"
+    "lodash.flatmap": "^4.5.0",
+    "lodash.keys": "^4.2.0",
+    "lodash.values": "^4.3.0"
   }
 }
