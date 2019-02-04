@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="debug">
+<head>
+  <script src="./index.js"></script>
+</head>
+<body ng-controller="DebugController as vm">
+  <button>
+    Hello
+    <tippy
+      on-show="vm.log('test')"
+      on-hide="vm.log('hide')"
+      interactive-border="3"
+      flip-behavior="flip"
+      delay="100 200"
+      placement="right"
+      popper-options="{}"
+      live-placement
+      max-width="120">
+      world
+    </tippy>
+  </button>
+</body>
+</html>

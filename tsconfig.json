@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "target": "es2015",
+    "strict": true,
+    "rootDirs": [
+      "./example"
+    ]
+  }
+}
