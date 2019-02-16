@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html ng-app="debug">
+<html>
 <head>
-  <script src="./index.js"></script>
+  <script src="../node_modules/angular/index.js"></script>
+  <script src="../src/index.ts"></script>
+  <link rel="stylesheet" href="../node_modules/tippy.js/dist/tippy.css">
+  <style>
+    body {
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+  </style>
 </head>
-<body ng-controller="DebugController as vm">
-  <button>
-    Hello
-    <tippy on-show="vm.log('show')" interactive placement="right">
-      world
-    </tippy>
-  </button>
+<body>
 </body>
 </html>
