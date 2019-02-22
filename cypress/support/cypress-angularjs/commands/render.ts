@@ -5,7 +5,7 @@ import { IControllerConstructor, IAngularStatic, IRootScopeService, IController,
 // TYPES
 
 interface RenderOptions {
-  template: string;
+  template?: string;
   controller?: IControllerConstructor;
   controllerAs?: string;
   modules?: string[];
@@ -13,7 +13,6 @@ interface RenderOptions {
 
 declare global {
   interface Window {
-    requestIdleCallback: Function
     $$cypressAngular: {
       fetchScope: () => Promise<IScope>
       fetchRootScope: () => Promise<IRootScopeService>
@@ -34,7 +33,7 @@ let count = 0
 class NoopController {}
 
 const render: typeof cy.render = ({
-  template,
+  template = '',
   controller = NoopController,
   controllerAs = '$ctrl',
   modules = [],
@@ -51,7 +50,7 @@ const render: typeof cy.render = ({
     const fetchScope = () => new Promise<IScope>((resolve) => {
       const poll = () => {
         const $scope = angular.element(node).scope()
-        $scope ? resolve($scope) : window.requestIdleCallback(poll)
+        $scope ? resolve($scope) : (window as any).requestIdleCallback(poll)
       }
       poll()
     })
@@ -59,7 +58,7 @@ const render: typeof cy.render = ({
     const fetchController = () => new Promise<IController>((resolve) => {
       const poll = () => {
         const controller = angular.element(node).controller()
-        controller ? resolve(controller) : window.requestIdleCallback(poll)
+        controller ? resolve(controller) : (window as any).requestIdleCallback(poll)
       }
       poll()
     })

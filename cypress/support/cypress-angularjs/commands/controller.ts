@@ -15,7 +15,6 @@ declare global {
       controller(subcommand: 'get', property: string): Chainable
       controller(subcommand: 'apply'): Chainable
       controller(subcommand: 'invoke', functionName: string, ...args: any[]): Chainable
-      controller(subcommand: 'await', functionName: string, ...args: any[]): Chainable
     }
   }
 }
@@ -54,12 +53,6 @@ function invoke(functionName: string, ...args: any[]) {
     .invoke(functionName, ...args)
 }
 
-function awaitFunction(functionName: string, ...args: any) {
-  return cy
-    .then(getController)
-    .then(controller => controller[functionName](...args))
-}
-
 // HELPERS
 
 function getScope() {
@@ -77,7 +70,7 @@ function getController() {
 // REGISTRATION
 
 const controller: typeof cy.controller = function (subcommand: any, ...args: any) {
-  const subcommands: any = { set, update, get, apply, invoke, await: awaitFunction };
+  const subcommands: any = { set, update, get, apply, invoke };
   const subcommandFunction: any = subcommands[subcommand] || (() => cy);
   return subcommandFunction(...args);
 }
