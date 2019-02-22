@@ -1,64 +1,22 @@
-import { IAngularStatic, IControllerConstructor, IController, IScope } from 'angular';
-import { EventEmitter } from 'events';
 
 context('Actions', () => {
   beforeEach(() => {
     cy.viewport(300, 300).visit('http://localhost:1234');
   })
 
-  // it('should render dynamic content', () => {
-  //   cy.get('button')
-  //     .trigger('mouseenter')
-  //     .get('.tippy-content')
-  //     .should('contain', 'world')
-  //     .get('body')
-  //     .click()
-  //     .get('.tippy-content')
-  //     .should('not.exist')
-  // });
-
-  // it('should modify code', () => {
-  //   cy.visit('http://securingsincity.github.io/react-ace/');
-  // });
-
-  let appId = 0;
-
-  function render(innerHTML: string, Controller?: IControllerConstructor) {
-    return () => cy.window().then((window) => {
-      const { document, angular } = window as (Window & { angular: IAngularStatic });
-
-      const node = document.createElement('div');
-      node.innerHTML = innerHTML;
-      document.body.appendChild(node);
-
-      const app = angular.module(`app-${appId++}`, ['tippy']);
-
-      if (Controller) {
-        app.controller('MainController', Controller);
-        node.setAttribute('ng-controller', 'MainController as vm');
-      }
-
-      angular.bootstrap(node, [app.name]);
-    });
-  }
-
-  afterEach(() => {
-    cy.document().then((document) => document.body.innerHTML = '');
-  });
-
   it('should render a tooltip', () => {
-    const content = `
+    const template = `
       <button>
-        hover here
-        <tippy>a tooltip</tippy>
+        HOVER
+        <tippy>TOOLTIP</tippy>
       </button>
     `;
 
-    cy.then(render(content))
+    cy.render({ template, modules: ['tippy'] })
       .get('button')
       .trigger('mouseenter')
       .get('.tippy-content')
-      .should('contain', 'a tooltip')
+      .contains('TOOLTIP')
       .get('body')
       .click()
       .get('.tippy-content')
@@ -66,34 +24,40 @@ context('Actions', () => {
   });
 
   it('should render dynamic content', () => {
-    const content = `
+    const template = `
       <button>
-        hover here
-        <tippy>{{ vm.count }}</tippy>
+        HOVER
+        <tippy>{{ $ctrl.count }}</tippy>
       </button>
     `;
 
-    const emitter = new EventEmitter();
-
-    class Controller implements IController {
-      constructor(private $scope: IScope) {}
-
-      count = 0
-
-      $onInit = () => emitter.on('increment', () => {
-        this.count++
-        this.$scope.$apply();
-      });
-    }
-
-    cy.then(render(content, Controller))
+    cy.render({ template, modules: ['tippy'] })
       .get('button')
       .trigger('mouseenter')
+      .controller('set', 'count', 0)
       .get('.tippy-content')
-      .should('contain', 0)
-      .then(() => emitter.emit('increment'))
+      .contains(0)
+      .controller('update', 'count', value => value + 1)
       .get('.tippy-content')
-      .should('contain', 1);
+      .contains(1);
   });
 
+  it('should test get', () => {
+    const template = `
+      <button ng-click="$ctrl.increment()">
+        CLICK
+      </button>
+    `;
+
+    class Controller {
+      count = 0
+      increment = () => this.count++
+    }
+
+    cy.render({ template, controller: Controller })
+      .get('button')
+      .click()
+      .controller('get', 'count')
+      .should('equal', 1);
+  });
 });
