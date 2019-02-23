@@ -64,15 +64,15 @@ context('cypress-angularjs', () => {
       cy.render({ controller: Controller })
         // check initial value
         .controller('get', 'count')
-        .then(count => expect(count).to.eq(0))
+        .should('eq', 0)
         // add one and check
         .controller('update', 'count', increment)
         .controller('get', 'count')
-        .then(count => expect(count).to.eq(1))
+        .should('eq', 1)
         // add another and check
         .controller('update', 'count', increment)
         .controller('get', 'count')
-        .then(count => expect(count).to.eq(2))
+        .should('eq', 2)
     })
   })
 
@@ -120,19 +120,19 @@ context('cypress-angularjs', () => {
     it('should return the value of a method on the controller', () => {
       cy.render({ controller: InvokeController })
         .controller('invoke', 'syncMethod')
-        .then(result => expect(result).to.equal('sync'))
+        .should('equal', 'sync')
     })
 
     it('should resolve async methods', () => {
       cy.render({ controller: InvokeController })
         .controller('invoke', 'asyncMethod')
-        .then(result => expect(result).to.equal('async'))
+        .should('equal', 'async')
     })
 
     it('should pass arguments', () => {
       cy.render({ controller: InvokeController })
         .controller('invoke', 'argumentMethod', 'Pippy')
-        .then(result => expect(result).to.equal('Hello Pippy!'))
+        .should('equal', 'Hello Pippy!')
     })
   })
 })
