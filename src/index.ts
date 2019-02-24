@@ -1,8 +1,8 @@
-import angular from 'angular';
-import { tippyDirective } from './directive';
+import angular from 'angular'
+import { tippyDirective } from './directive'
 
-const module = angular.module('tippy', []);
+const module = angular.module('tippy', [])
 
-module.directive('tippy', () => tippyDirective);
+module.directive('tippy', () => tippyDirective)
 
-export default module.name;
+export default module.name

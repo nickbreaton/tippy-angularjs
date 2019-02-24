@@ -10,4 +10,4 @@ export default {
   'number,string': '@',
   // EXPRESSION BINDING
   'Function': '&',
-};
+}

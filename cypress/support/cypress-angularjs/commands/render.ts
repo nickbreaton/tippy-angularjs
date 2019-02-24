@@ -1,14 +1,14 @@
 /// <reference types="cypress" />
 
-import { IControllerConstructor, IAngularStatic, IRootScopeService, IController, IScope } from 'angular';
+import { IControllerConstructor, IAngularStatic, IRootScopeService, IController, IScope } from 'angular'
 
 // TYPES
 
 interface RenderOptions {
-  template?: string;
-  controller?: IControllerConstructor;
-  controllerAs?: string;
-  modules?: string[];
+  template?: string
+  controller?: IControllerConstructor
+  controllerAs?: string
+  modules?: string[]
 }
 
 declare global {
@@ -39,10 +39,10 @@ const render: typeof cy.render = ({
   modules = [],
 }) => {
   return cy.window().then((window) => {
-    const { document, angular } = window as (Window & { angular: IAngularStatic });
+    const { document, angular } = window as (Window & { angular: IAngularStatic })
 
     const node = document.createElement('div')
-    node.innerHTML = template;
+    node.innerHTML = template
     document.body.appendChild(node)
 
     const app = angular.module(`app-${count++}`, modules)
@@ -73,7 +73,7 @@ const render: typeof cy.render = ({
       fetchRootScope
     }
 
-    app.controller('MainController', controller);
+    app.controller('MainController', controller)
     node.setAttribute('ng-controller', `MainController as ${controllerAs}`)
 
     angular.bootstrap(node, [app.name])
@@ -82,4 +82,4 @@ const render: typeof cy.render = ({
 
 // SETUP
 
-Cypress.Commands.add('render', render);
+Cypress.Commands.add('render', render)

@@ -1,7 +1,7 @@
 
 context('Actions', () => {
   beforeEach(() => {
-    cy.viewport(300, 300).visit('http://localhost:1234');
+    cy.viewport(300, 300).visit('http://localhost:1234')
   })
 
   it('should render a tooltip', () => {
@@ -10,7 +10,7 @@ context('Actions', () => {
         HOVER
         <tippy>TOOLTIP</tippy>
       </button>
-    `;
+    `
 
     cy.render({ template, modules: ['tippy'] })
       .get('button')
@@ -20,8 +20,8 @@ context('Actions', () => {
       .get('body')
       .click()
       .get('.tippy-content')
-      .should('not.exist');
-  });
+      .should('not.exist')
+  })
 
   it('should render dynamic content', () => {
     const template = `
@@ -29,7 +29,7 @@ context('Actions', () => {
         HOVER
         <tippy>{{ $ctrl.count }}</tippy>
       </button>
-    `;
+    `
 
     cy.render({ template, modules: ['tippy'] })
       .get('button')
@@ -39,25 +39,6 @@ context('Actions', () => {
       .contains(0)
       .controller('update', 'count', value => value + 1)
       .get('.tippy-content')
-      .contains(1);
-  });
-
-  it('should test get', () => {
-    const template = `
-      <button ng-click="$ctrl.increment()">
-        CLICK
-      </button>
-    `;
-
-    class Controller {
-      count = 0
-      increment = () => this.count++
-    }
-
-    cy.render({ template, controller: Controller })
-      .get('button')
-      .click()
-      .controller('get', 'count')
-      .should('equal', 1);
-  });
-});
+      .contains(1)
+  })
+})

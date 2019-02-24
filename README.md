@@ -13,10 +13,10 @@ npm i tippy-angularjs
 Place a `<tippy>` as a child of the element it describes.
 
 ```js
-import tippyAngular from 'tippy-angularjs';
-import 'tippy.js/dist/tippy.css';
+import tippyAngular from 'tippy-angularjs'
+import 'tippy.js/dist/tippy.css'
 
-angular.module('app', [tippyAngular]);
+angular.module('app', [tippyAngular])
 ```
 
 ```html

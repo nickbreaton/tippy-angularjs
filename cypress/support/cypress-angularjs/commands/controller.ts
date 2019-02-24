@@ -44,7 +44,7 @@ function get(property: string) {
 function apply() {
   return cy
     .then(getScope)
-    .then($scope => $scope.$apply());
+    .then($scope => $scope.$apply())
 }
 
 function invoke(functionName: string, ...args: any[]) {
@@ -70,9 +70,9 @@ function getController() {
 // REGISTRATION
 
 const controller: typeof cy.controller = function (subcommand: any, ...args: any) {
-  const subcommands: any = { set, update, get, apply, invoke };
-  const subcommandFunction: any = subcommands[subcommand] || (() => cy);
-  return subcommandFunction(...args);
+  const subcommands: any = { set, update, get, apply, invoke }
+  const subcommandFunction: any = subcommands[subcommand] || (() => cy)
+  return subcommandFunction(...args)
 }
 
 Cypress.Commands.add('controller', controller)

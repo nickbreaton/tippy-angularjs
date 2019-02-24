@@ -19,7 +19,7 @@ context('cypress-angularjs', () => {
     })
 
     it('should set the value on the controller', () => {
-      let instance: Controller;
+      let instance: Controller
 
       class Controller {
         text?: string
@@ -82,7 +82,7 @@ context('cypress-angularjs', () => {
         <p>{{ $ctrl.text }}<p>
       `
 
-      let instance: Controller;
+      let instance: Controller
 
       class Controller {
         text = 'one'
