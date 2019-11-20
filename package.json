@@ -24,7 +24,7 @@
     "@types/lodash.flatmap": "^4.5.4",
     "@types/lodash.keys": "^4.2.4",
     "@types/lodash.values": "^4.3.4",
-    "angular": "^1.7.6",
+    "angular": "^1.7.9",
     "parcel": "^1.11.0",
     "rimraf": "^2.6.3",
     "tippy.js": "^3.4.1",
